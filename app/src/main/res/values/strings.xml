@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Phishing Detector</string>
+    <string name="app_title">Phishing Detector</string>
+    <string name="link_hint">Paste Link Here</string>
+    <string name="check_link_button">Check Link</string>
+    <string name="scan_messages_button">Scan Messages</string>
+</resources>
