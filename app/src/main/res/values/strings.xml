@@ -4,4 +4,6 @@
     <string name="link_hint">Paste Link Here</string>
     <string name="check_link_button">Check Link</string>
     <string name="scan_messages_button">Scan Messages</string>
+    <string name="check_link">Check Link</string>
+    <string name="clear_link">Clear Link</string>
 </resources>

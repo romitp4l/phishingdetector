@@ -1,87 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color">
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/app_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/ic_shield" />  <TextView
-    android:id="@+id/app_title"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/app_logo"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="20dp"
-    android:text="@string/app_title"
-    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-    android:textColor="@color/text_color_primary" />
-
-
-    <EditText
-        android:id="@+id/linkEditText"
+    <!-- Heading -->
+    <TextView
+        android:id="@+id/headingTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/app_title"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/edit_text_background"
-        android:hint="@string/link_hint"
-        android:inputType="textUri"
         android:padding="16dp"
-        android:textColor="@color/text_color_primary" />
+        android:text="Phishing Link Protection Tool"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/heading_background"
+        android:textColor="@android:color/white" />
 
-    <Button
-        android:id="@+id/checkLinkButton"
+    <!-- Link Input and Actions -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linkEditText"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_background"
-        android:text="@string/check_link_button"
-        android:textColor="@color/text_color_on_primary" />
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
 
+        <!-- Link Input -->
+        <EditText
+            android:id="@+id/linkEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter link to check"
+            android:inputType="textUri"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:background="@drawable/edit_text_background"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="16dp" />
+
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/checkLinkButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/check_link"
+                android:padding="12dp"
+                android:background="@drawable/button_background"
+                android:textColor="@android:color/white" />
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/clearLinkButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/clear_link"
+                android:padding="12dp"
+                android:background="@drawable/button_background"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Result Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/resultCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/checkLinkButton"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:visibility="gone"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp">
 
         <TextView
             android:id="@+id/resultTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:padding="16dp"
-            android:textColor="@color/text_color_on_secondary"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            tools:text="Result will be displayed here" />
     </androidx.cardview.widget.CardView>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <!-- Scan Messages Button -->
     <Button
         android:id="@+id/scanMessagesButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Scan Messages for Links"
+        android:padding="12dp"
         android:background="@drawable/button_background"
-        android:text="@string/scan_messages_button"
-        android:textColor="@color/text_color_on_primary" />
+        android:textColor="@android:color/white" />
 
-</RelativeLayout>
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messagesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp"
+        tools:listitem="@layout/message_item_layout" />
+</LinearLayout>
